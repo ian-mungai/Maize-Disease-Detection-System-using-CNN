@@ -65,7 +65,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                document.getElementById('logout-form').submit();">
+                                                                                                                                                        document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -80,10 +80,20 @@
                 </div>
             </div>
         </nav>
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+
+        <div class="col-md-12 d-flex justify-content-between">
+            <div class="col-md-1">
+                <a class="nav-link"></a>
+                <a class="nav-link" href="{{ route('predictions.index') }}">{{ __('Predictions') }}</a>
+            </div>
+            {{-- <div style="border-left: 1px solid rgb(0, 0, 0); height: 500px;"></div> --}}
+            <div class="col-md-11">
+                <main class="py-4">
+                    @yield('content')
+                </main>
+            </div>
+
+        </div>
 </body>
 
 </html>

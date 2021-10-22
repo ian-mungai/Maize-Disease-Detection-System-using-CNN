@@ -1,17 +1,23 @@
-import numpy as np
-from flask import Flask, jsonify, request
-from keras.preprocessing import image
+from flask import Flask, request
+
 
 app = Flask(__name__)
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png']
 
 
-@app.route('/blight-analyzer', methods=['POST'])
-def predictor():
+@app.route('/')
+def home():
+    return "Flask running"
 
-    return "Online"
+
+@app.route('/disease-analyzer', methods=['POST'])
+def tb():
+    plant_image = request.json['img']
+
+    response = "File received : " + plant_image  # model.predict(img_arr)
+
+    return response
 
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    app.run(host='0.0.0.0', debug=True)
