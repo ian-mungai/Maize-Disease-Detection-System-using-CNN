@@ -65,7 +65,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                        document.getElementById('logout-form').submit();">
+                                                                                                                                                                    document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -85,6 +85,10 @@
             <div class="col-md-1">
                 <a class="nav-link"></a>
                 <a class="nav-link" href="{{ route('predictions.index') }}">{{ __('Predictions') }}</a>
+                @can('viewAny', \App\Models\Role::class)
+                    <a class="nav-link" href="{{ route('roles.index') }}">{{ __('Roles') }}</a>
+                    <a class="nav-link" href="{{ route('diseases.index') }}">{{ __('Diseases') }}</a>
+                @endcan
             </div>
             {{-- <div style="border-left: 1px solid rgb(0, 0, 0); height: 500px;"></div> --}}
             <div class="col-md-11">
