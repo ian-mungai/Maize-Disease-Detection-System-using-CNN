@@ -41,7 +41,7 @@ class PredictionController extends Controller
 
         $client = new Client();
         $img = fopen($imagePath, 'r');
-        $r = $client->request('POST', 'http://127.0.0.1:5000/disease-analyzer', ['json'=> ['img' => $imagePath]]);
+        $r = $client->request('POST', env('FLASK_IP').':'. env('FLASK_PORT').'/disease-analyzer' , ['json'=> ['img' => $imagePath]]);
 
         $prediction = new Prediction();
         $prediction->description = $request->description;
