@@ -41,13 +41,13 @@ class PredictionController extends Controller
 
         $client = new Client();
         $img = fopen($imagePath, 'r');
-        $r = $client->request('POST', env('FLASK_IP').':'. env('FLASK_PORT').'/disease-analyzer' , ['json'=> ['img' => $imagePath]]);
+        $resp = $client->request('POST', env('FLASK_IP').':'. env('FLASK_PORT').'/disease-analyzer' , ['json'=> ['img' => $imagePath]]);
 
         $prediction = new Prediction();
         $prediction->description = $request->description;
         $prediction->imageName = $imageName;
         $prediction->userId = 1;
-        $prediction->prediction =  $r->getBody();
+        $prediction->prediction =  $resp->getBody();
 
         $prediction->save();
         return redirect()->route('predictions.index')

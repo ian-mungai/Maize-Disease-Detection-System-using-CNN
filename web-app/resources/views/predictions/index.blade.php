@@ -10,8 +10,8 @@
                     <thead>
                         <tr>
                             <th>Prediction ID</th>
-                            <th>Prediction</th>
                             <th>Description</th>
+                            <th>Prediction</th>
                             <th colspan="2">Action</th>
                         </tr>
                     </thead>
@@ -19,8 +19,8 @@
                         @foreach ($predictions as $prediction)
                             <tr>
                                 <td>{{ $prediction->predictionId }}</td>
-                                <td>{{ $prediction->prediction }}</td>
                                 <td>{{ $prediction->description }}</td>
+                                <td>{{ $prediction->prediction }}</td>
                                 <td>
                                     <a href="predictions/{{ $prediction->predictionId }}" class="btn btn-primary">Show</a>
                                 </td>
