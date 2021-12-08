@@ -9,4 +9,10 @@ class Prediction extends Model
 {
     use HasFactory;
     protected $primaryKey = 'predictionId';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

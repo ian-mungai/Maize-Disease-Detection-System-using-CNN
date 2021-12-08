@@ -33,7 +33,7 @@ def diseaseanalyzer():
         elif disease == '[1]':
             disease_class = 'Common Rust'
         elif disease == '[2]':
-            disease_class = 'Grey Leaf Spot'
+            disease_class = 'Gray Leaf Spot'
         elif disease == '[3]':
             disease_class = 'Healthy'
 
