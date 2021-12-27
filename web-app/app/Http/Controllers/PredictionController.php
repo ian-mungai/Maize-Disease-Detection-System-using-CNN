@@ -59,19 +59,4 @@ class PredictionController extends Controller
     {
         return view('predictions.show', compact('prediction'));
     }
-
-    public function edit(Prediction $prediction)
-    {
-        //
-    }
-
-    public function update(Request $request, Prediction $prediction)
-    {
-        //
-    }
-
-    public function destroy(Prediction $prediction)
-    {
-        //
-    }
 }
