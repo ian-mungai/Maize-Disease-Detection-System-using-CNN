@@ -29,18 +29,18 @@ def diseaseanalyzer():
         disease_class = "N/A"
 
         if disease == '[0]':
-            disease_class = "Blight"
+            disease_class = '0'
         elif disease == '[1]':
-            disease_class = 'Common Rust'
+            disease_class = '1'
         elif disease == '[2]':
-            disease_class = 'Gray Leaf Spot'
+            disease_class = '2'
         elif disease == '[3]':
-            disease_class = 'Healthy'
+            disease_class = '3'
 
         return disease_class
 
     except Exception as e:
-        return "Error : " + str(e)
+        return "Prediction Error"
 
 
 if __name__ == '__main__':

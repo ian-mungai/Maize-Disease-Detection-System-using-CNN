@@ -46,7 +46,6 @@ class PredictionController extends Controller
         $client = new Client();
         $img = fopen($imagePath, 'r');
         $url = "http://127.0.0.1:4040/disease-analyzer";
-        error_log($url);
 
         $resp = $client->request('POST', $url , ['json'=> ['img' => $imagePath]]);
 
