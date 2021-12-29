@@ -44,9 +44,9 @@ class User extends Authenticatable
         return $this->hasOne(Role::class, 'roleId');
     }
 
-    public function prediction()
+    public function predictions()
     {
-        return $this->hasMany(Prediction::class, 'predictionId');
+        return $this->hasMany(Prediction::class);
     }
 
 

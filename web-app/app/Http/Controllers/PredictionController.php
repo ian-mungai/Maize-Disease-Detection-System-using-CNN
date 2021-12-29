@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\Prediction;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -14,9 +15,10 @@ class PredictionController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $predictions = Prediction::all();
+        $user_id = Auth::user()->userId;
+        $predictions = Prediction::where('userId', $user_id)->get();
 
         return view('predictions.index', compact('predictions'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -29,6 +31,8 @@ class PredictionController extends Controller
 
     public function store(Request $request)
     {
+        $user_id = Auth::user()->userId;
+
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -41,12 +45,15 @@ class PredictionController extends Controller
 
         $client = new Client();
         $img = fopen($imagePath, 'r');
-        $resp = $client->request('POST', env('FLASK_IP').':'. env('FLASK_PORT').'/disease-analyzer' , ['json'=> ['img' => $imagePath]]);
+        $url = "http://127.0.0.1:4040/disease-analyzer";
+        error_log($url);
+
+        $resp = $client->request('POST', $url , ['json'=> ['img' => $imagePath]]);
 
         $prediction = new Prediction();
         $prediction->description = $request->description;
         $prediction->imageName = $imageName;
-        $prediction->userId = 1;
+        $prediction->userId = $user_id;
         $prediction->prediction =  $resp->getBody();
 
         $prediction->save();
