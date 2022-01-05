@@ -1,8 +1,12 @@
 import PIL
+import os
 from flask import Flask, request
 import tensorflow as tf
 import numpy as np
 from keras.preprocessing import image
+
+os.environ['CUDA_VISIBLE_DEVICES'] = ''
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 app = Flask(__name__)
 
@@ -17,29 +21,30 @@ def diseaseanalyzer():
 
         img_arr = tf.expand_dims(img_arr, axis=0)
 
-        model = tf.saved_model.load('model/')
+        model = tf.saved_model.load('model')
         f = model.signatures["serving_default"]
 
         outputs = f(tf.constant(img_arr, tf.float32))
 
-        prediction = tf.math.argmax(outputs["dense_1"], 1)
+        prediction = tf.math.argmax(outputs["dense"], 1)
 
         disease = np.array_str(prediction.numpy())
 
         disease_class = "N/A"
 
         if disease == '[0]':
-            disease_class = '0'
+            disease_class = 'Blight'
         elif disease == '[1]':
-            disease_class = '1'
+            disease_class = 'Common Rust'
         elif disease == '[2]':
-            disease_class = '2'
+            disease_class = 'Gray Leaf Spot'
         elif disease == '[3]':
-            disease_class = '3'
+            disease_class = 'Healthy'
 
         return disease_class
 
     except Exception as e:
+        print(str(e))
         return "Prediction Error"
 
 

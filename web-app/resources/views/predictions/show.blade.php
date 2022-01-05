@@ -16,12 +16,18 @@
                         <div>
                             <b>Description : </b>{{ $prediction->description }}
                             <br>
-                            <b>Prediction : </b>{{ $prediction->prediction }}
+                            <b>Prediction : </b>{{ $diseases->diseaseName }}
                         </div>
                         <br>
                         <div>
-                            <img src="{{ asset('images/' . $prediction->imageName) }}" alt="tag">
+                            <img src="{{ asset('images/' . $prediction->imageName) }}" alt="tag" height="400"
+                                width="600" />
                         </div>
+                        <br>
+                        <div>
+                            <b>Recommendation : </b><br>{{ $diseases->recommendation }}
+                        </div>
+
                     </div>
                 </div><br>
                 <a class="btn btn-danger" href="{{ route('predictions.index') }}">Back</a>

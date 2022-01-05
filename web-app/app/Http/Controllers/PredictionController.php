@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\Prediction;
+use App\Models\Disease;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
@@ -63,6 +64,8 @@ class PredictionController extends Controller
 
     public function show(Prediction $prediction)
     {
-        return view('predictions.show', compact('prediction'));
+        $diseases = Disease::where('diseaseName', $prediction->prediction)->first();
+
+        return view('predictions.show', compact('prediction','diseases'));
     }
 }
