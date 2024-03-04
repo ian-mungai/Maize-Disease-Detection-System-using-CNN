@@ -1,1 +1,1 @@
-# IS-Project-II
+Maize-Disease-Detection-System-using-CNN
